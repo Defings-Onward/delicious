@@ -233,12 +233,15 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
+        <div class="custom_add_button_cont">
+        <button class="custom_add_button" id="custom_add_button_menu">Add Menu</button>
+      </div>
         <h2>Menu</h2>
         <div><span>Check Our Tasty</span> <span class="description-title">Menu</span></div>
       </div><!-- End Section Title -->
 
       <div class="container isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
+        
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul class="menu-filters isotope-filters">
@@ -255,7 +258,7 @@
           <div class="col-lg-6 menu-item isotope-item filter-{{menu.type.name}}">
             <img src="{% static 'media/' %}{{menu.image}}" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Lobster Bisque</a><span>${{menu.price}}</span>
+              <a href="#">{{menu.name}}</a><span>${{menu.price}}</span>
             </div>
             <div class="menu-ingredients">
               {{menu.description}}
@@ -374,9 +377,9 @@
     <section id="events" class="events section">
 
       <img class="slider-bg" src="{% static 'assets/img/events-bg.jpg' %}" alt="" data-aos="fade-in">
-
+      
       <div class="container">
-
+        
         <div class="swiper init-swiper" data-aos="fade-up" data-aos-delay="100">
           <script type="application/json" class="swiper-config">
             {
@@ -393,7 +396,11 @@
               }
             }
           </script>
+          <div class="custom_add_button_cont">
+        <button class="custom_add_button" id="custom_add_button_event">Add Event</button>
+      </div>
           <div class="swiper-wrapper">
+            
             {% for occasion in occasion %}
             <div class="swiper-slide">
               <div class="row gy-4 event-item">
@@ -788,7 +795,119 @@
 
     
   </footer>
+  {% if not user.is_authenticated %}
+<div id="si_gn_back">
+        <div  id="si_gn_cont">
+            <div id="si_gn_title">To Get the full functionality of the project you have to Sign in to be an Admin</div>
+            <div id="si_gn_main">
+                <div id="si_gn_scroll">
+                    <form method="post" role="form">
+                    {% csrf_token %}
+                    <input class="si_gn_input" type="text" name="first_name" placeholder="First Name">
+                    <input class="si_gn_input" type="text" name="last_name" placeholder="Last Name">
+                    <input class="si_gn_input" type="text"  name="username" placeholder="Username">
+                    <input class="si_gn_input" type="password" name="password" placeholder="Password">
+                </div>
+                <input type="hidden" name="form_type" value="signup">
+                <div id="si_gn_but_cont">
+                  <button type="submit" class="si_gn_button">Sign in</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const scrolls = document.querySelectorAll('.si_gn_input')
+        const main = document.getElementById('si_gn_main')
+        const cont = document.getElementById('si_gn_cont')
+        
+        let count = 0;
+        scrolls.forEach((input) => {
+            count += 1;
+        })
 
+        function durate() {
+            var pageHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight,
+                           document.documentElement.clientHeight, document.documentElement.scrollHeight,
+                           document.documentElement.offsetHeight );
+            if (pageHeight > 500 || count < 5) {
+            cont.id = 'si_gn_cont_op'
+            main.id = 'si_gn_main_op'
+        } else if(pageHeight < 600 && count > 4) {
+            cont.id = 'si_gn_cont'
+            main.id = 'si_gn_main'
+        }
+        console.log(pageHeight)
+        }
+
+        
+        setInterval(durate, 5000)
+        
+        console.log(count)
+        console.log(pageHeight)
+        
+    </script>{% endif %}
+    <div id="event-handler">
+      <div id="si_gn_back">
+        <div  id="si_gn_cont">
+            <div id="si_gn_title">Add Occasions.</div>
+            <div id="si_gn_main">
+                <div id="si_gn_scroll">
+                    <form method="post" enctype="multipart/form-data"  role="form">
+                    {% csrf_token %}
+                    <input class="si_gn_input" type="file" name="photo">
+                    <input class="si_gn_input" type="text" name="title" placeholder="title">
+                    <textarea class="si_gn_input" type="text" name="1p" placeholder="write a note"></textarea>
+                    <input class="si_gn_input" type="number" name="price" placeholder="price">
+                    <input class="si_gn_input" type="text"  name="1b" placeholder="first tag">
+                    <input class="si_gn_input" type="text"  name="2b" placeholder="second tag">
+                    <input class="si_gn_input" type="text"  name="3b" placeholder="third tag">
+                    <textarea class="si_gn_input" type="text" name="2p" placeholder="Add a short note(optional)"></textarea>
+                </div>
+                <input type="hidden" name="form_type" value="event">
+                <div id="si_gn_but_cont">
+                  <button type="submit" class="si_gn_button" id="si_gn_button_event">Add Event</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/js/si_gn_js.js' %}">
+       
+    </script>
+    </div>
+    <div id="menu-handler">
+      <div id="si_gn_back">
+        <div  id="si_gn_cont">
+            <div id="si_gn_title">Add Menu.</div>
+            <div id="si_gn_main">
+                <div id="si_gn_scroll">
+                    <form method="post" enctype="multipart/form-data"  role="form">
+                    {% csrf_token %}
+                    <input class="si_gn_input" type="file" name="photo">
+                    <input class="si_gn_input" type="text" name="title" placeholder="title">
+                   
+                    <input class="si_gn_input" type="number" name="price" placeholder="price">
+                     <textarea class="si_gn_input" type="text" name="description" placeholder="Description"></textarea>
+                    <select class="si_gn_input" name="type">
+                      <option value="specialty">specialty</option>
+                      <option value="salads">salads</option>
+                      <option value="starters">starters</option>
+                    </select>
+                    
+                </div>
+                <input type="hidden" name="form_type" value="menu">
+                <div id="si_gn_but_cont">
+                  <button type="submit" class="si_gn_button" id="si_gn_button_menu">Add Menu</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/js/si_gn_js.js' %}">
+       
+    </script>
+    </div>
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

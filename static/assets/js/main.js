@@ -215,3 +215,29 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+const events  = document.getElementById('event-handler')
+const events2  = document.getElementById('menu-handler')
+const showbtn = document.querySelector('.custom_add_button')
+const hidebtn = document.querySelector('.si_gn_button')
+
+events.style.display = 'none'
+events2.style.display = 'none'
+
+showbtn.addEventListener('click', (ev) => {
+  if(ev.id == 'custom_add_button_event') {
+    events.style.display = 'flex'
+  } else {
+    events2.style.display = 'flex'
+  }
+  
+})
+
+hidebtn.addEventListener('click', () => {
+  if(ev.id == 'si_gn_button_event') {
+    events.style.display = 'none'
+  } else {
+    events2.style.display = 'none'
+  }
+  
+})

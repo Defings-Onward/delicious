@@ -1,7 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Department, Chef, Occasion, Testimonies, MenuType, Menu, Table, Contact
 from .utils import send_email_to_customers
+from django.contrib.auth.models import User, Group
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required, permission_required
 
 def email_customers(request):
     send_email_to_customers()
@@ -37,6 +40,55 @@ def home(request):
             contact.subject = subject
             contact.message = message
             contact.save()
+        if form_type == 'signup':
+            first_name = request.POST.get("first_name")
+            last_name = request.POST.get("last_name")
+            password = request.POST.get("password")
+            username = request.POST.get("username")
+            user = User()
+            user.username = username
+            user.first_name = first_name
+            user.last_name = last_name
+            user.password = password
+            user.save()
+            login(request, user)
+            print("signed in")
+            return redirect('/')
+        if form_type == 'event':
+            photo = request.FILES.get('photo')
+            title = request.POST.get('title')
+            price = request.POST.get('price')
+            p1 = request.POST.get('1p')
+            b1 = request.POST.get('1b')
+            b2 = request.POST.get('2b')
+            b3 = request.POST.get('3b')
+            p2 = request.POST.get('1p')
+            occation = Occasion()
+            occation.picture = photo
+            occation.head  = title
+            occation.price = price
+            occation.para1 = p1
+            occation.dot1 = b1
+            occation.dot2 = b2
+            occation.dot3 = b3
+            occation.para2 = p2
+            occation.save()
+        if form_type == 'menu':
+            photo = request.FILES.get('photo')
+            title = request.POST.get('title')
+            price = request.POST.get('price')
+            description = request.POST.get('description')
+            type = request.POST.get('type')
+            menu = Menu()
+            menu.name = title
+            menu.price = price
+            menu.image = photo
+            menu.description = description
+            types = MenuType.objects.get(name=type)
+            menu.type = types
+            menu.save()
+
+
     context = {
         'menu': Menu.objects.all(),
         'occasion': Occasion.objects.all(),

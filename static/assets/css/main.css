@@ -22,7 +22,7 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #433f39; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #ffb03b; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: #f09814; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -1666,3 +1666,110 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
+#si_gn_back{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.48);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000000000000000000000000000000000000000000000000000000000000000000000;
+}
+
+#si_gn_cont, #si_gn_cont_op{
+    height: 89%;
+    width: 60%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 15px;
+    max-width: 300px;
+    min-height: 200px;
+}
+#si_gn_cont_op{
+    height: fit-content;
+}
+#si_gn_title{
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: start;
+    margin-bottom: 25px;
+    margin-left: 11px;
+    margin-right: 11px;
+    color: var(--heading-color);
+}
+#si_gn_main, #si_gn_main_op{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 14px;
+}
+#si_gn_main_op{
+    height: fit-content;
+    
+    overflow-y: hidden;
+}
+#si_gn_scroll{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    width: 90%;
+}
+.si_gn_input{
+    width: 98%;
+    border-radius: 12px;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid var(--default-color);
+    background-color: rgb(241, 240, 240);
+    outline: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+#si_gn_but_cont{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 60px;
+}
+.si_gn_button{
+    color: white;
+    padding: 10px 13px;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 9px;
+    margin-right: 13px;
+}
+.custom_add_button_cont{
+  width: 100%;display: flex; justify-content: end;align-items: center;margin-bottom: 39px;
+}
+.custom_add_button{
+  background-color: var(--accent-color);color: white;padding: 9px 10px;border-radius: 4px;border: none;
+}
+.custom_add_button:hover{
+  background-color: #e08701;
+  transition: 0.15s;
+}
+/* #event-handler{
+  display: none;
+}
+.custom_add_button:active #event-handler{
+  display:flex;
+}
+#si_gn_button_event:active #event-handler{
+  display: none;
+} */
