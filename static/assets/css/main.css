@@ -1764,6 +1764,13 @@ section,
   background-color: #e08701;
   transition: 0.15s;
 }
+.btn-order{
+  border: none;background: none;color: white;
+}
+.btn-order:hover{
+  color: var(--accent-color);
+  transition: 0.15s;
+}
 /* #event-handler{
   display: none;
 }

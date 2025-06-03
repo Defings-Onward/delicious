@@ -27,8 +27,10 @@ def home(request):
             table.phone = phone
             table.date = date + ' ' + time
             table.message = message
+            table.read = False
             print(date + time)
             table.save()
+            return redirect('/')
         if form_type == 'contact':
             name = request.POST.get("name")
             email = request.POST.get("email")
@@ -40,6 +42,7 @@ def home(request):
             contact.subject = subject
             contact.message = message
             contact.save()
+            return redirect('/')
         if form_type == 'signup':
             first_name = request.POST.get("first_name")
             last_name = request.POST.get("last_name")
@@ -73,6 +76,7 @@ def home(request):
             occation.dot3 = b3
             occation.para2 = p2
             occation.save()
+            return redirect('/')
         if form_type == 'menu':
             photo = request.FILES.get('photo')
             title = request.POST.get('title')
@@ -87,14 +91,21 @@ def home(request):
             types = MenuType.objects.get(name=type)
             menu.type = types
             menu.save()
-
+            return redirect('/')
+        if form_type == 'unread':
+            orders = Table.objects.filter(read=False)
+            for order in orders:
+                order.read = True
+                order.save()
+            return redirect('/#order')
 
     context = {
         'menu': Menu.objects.all(),
         'occasion': Occasion.objects.all(),
         'chef': Chef.objects.all(),
-        'testi': Testimonies.objects.all()
-        
+        'testimony': Testimonies.objects.all(),
+        'table': Table.objects.all(),
+        'unread': Table.objects.filter(read=False).count()
     }
     return render(request, 'index.html', context=context)
 # Create your views here.

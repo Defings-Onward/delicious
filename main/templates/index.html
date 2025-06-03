@@ -68,23 +68,9 @@
             <li><a href="#events">Events</a></li>
             <li><a href="#chefs">Chefs</a></li>
             <li><a href="#gallery">Gallery</a></li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li>
+            <!-- {% if user.is_authenticated %}<li><a href="#order">Order  {% if unread %}<span style="background-color: var(--accent-color);padding: 0.5px 6px; border-radius: 9px; font-size: 10px;color: black;margin-left: 2px;">{{unread}}</span>{% endif %}</a></li>{% endif %} -->
+            {% if user.is_authenticated %}<form method="post">{% csrf_token %}<input type="hidden" name="form_type" value="unread"><li><a href="#order"><button type="submit" class="btn-order">Order  {% if unread %}<span style="background-color: var(--accent-color);padding: 0.5px 6px; border-radius: 9px; font-size: 10px;color: black;margin-left: 2px;">{{unread}}</span>{% endif %}</button></a></li></form>{% endif %}
+            
             <li><a href="#contact">Contact</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -661,7 +647,36 @@
       </div>
 
     </section><!-- /Testimonials Section -->
+   {% if user.is_authenticated %}
+     <section id="order" class="menu section">
 
+      <div class="container section-title" data-aos="fade-up">
+        
+        <h2>orders</h2>
+        <div><span>Latest</span> <span class="description-title">Orders</span></div>
+      </div>
+      <div class="container isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+        
+        
+
+        <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
+          {% for table in table %}
+          <div class="col-lg-12 menu-item isotope-item">
+            <div class="menu-content">
+              <a href="#">{{table.message}}</a><span>{{table.date}}</span>
+            </div>
+            <div class="menu-ingredients">
+              {{table.name}}, {{table.phone}}
+            </div>
+          </div><!-- Menu Item -->
+          {% endfor %}
+          
+        </div><!-- Menu Container -->
+
+      </div>
+
+    </section>
+    {% endif %}
     <!-- Contact Section -->
     <section id="contact" class="contact section">
 
@@ -740,7 +755,7 @@
       </div>
 
     </section><!-- /Contact Section -->
-
+ 
   </main>
 
   <footer id="footer" class="footer dark-background">

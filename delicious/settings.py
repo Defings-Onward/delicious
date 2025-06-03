@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'delicious.urls'
@@ -78,14 +79,13 @@ WSGI_APPLICATION = 'delicious.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'estate',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'ajayiobanijesu_2006',
-        'PORT': '5432',
-
+        'PASSWORD': 'RAfxVLxSKaVFgqgUQXXfBdHFjqzSOXFR',
+        'HOST': 'caboose.proxy.rlwy.net',
+        'PORT': '53815',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

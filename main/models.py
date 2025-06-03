@@ -53,6 +53,7 @@ class Table(models.Model):
     phone = models.CharField(null=True, max_length=200)
     date = models.DateTimeField()
     message = models.TextField()
+    read = models.BooleanField(default=True)
 
 
 class Contact(models.Model):

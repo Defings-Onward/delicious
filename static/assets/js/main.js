@@ -218,26 +218,31 @@
 
 const events  = document.getElementById('event-handler')
 const events2  = document.getElementById('menu-handler')
-const showbtn = document.querySelector('.custom_add_button')
-const hidebtn = document.querySelector('.si_gn_button')
+const showbtn = document.querySelectorAll('.custom_add_button')
+const hidebtn = document.querySelectorAll('.si_gn_button')
 
 events.style.display = 'none'
 events2.style.display = 'none'
-
-showbtn.addEventListener('click', (ev) => {
-  if(ev.id == 'custom_add_button_event') {
+showbtn.forEach((show) => {
+  show.addEventListener('click', (ev) => {
+  if(ev.target.id == 'custom_add_button_event') {
     events.style.display = 'flex'
+    console.log(ev.id)
   } else {
     events2.style.display = 'flex'
   }
-  
+  console.log(ev.target.id)
+  console.log("event")
 })
 
-hidebtn.addEventListener('click', () => {
-  if(ev.id == 'si_gn_button_event') {
+})
+hidebtn.forEach((hide) => {
+  hide.addEventListener('click', (ev) => {
+  if(ev.target.id == 'si_gn_button_event') {
     events.style.display = 'none'
   } else {
     events2.style.display = 'none'
   }
   
+})
 })
