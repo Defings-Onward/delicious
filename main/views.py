@@ -56,6 +56,7 @@ def home(request):
             user.save()
             login(request, user)
             print("signed in")
+            #good
             return redirect('/')
         if form_type == 'event':
             photo = request.FILES.get('photo')
